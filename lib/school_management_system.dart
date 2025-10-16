@@ -1,0 +1,16 @@
+export 'main.dart';
+export 'models/student.dart';
+export 'models/teacher.dart';
+export 'models/course.dart';
+export 'models/grade.dart';
+export 'models/attendance.dart';
+export 'models/user.dart';
+export 'services/school_management_service.dart';
+export 'views/dashboard_screen.dart';
+export 'views/students_list_screen.dart';
+export 'views/teachers_list_screen.dart';
+export 'views/courses_list_screen.dart';
+export 'views/grades_list_screen.dart';
+export 'views/attendance_list_screen.dart';
+export 'views/school_management_drawer.dart';
+export 'utils/constants.dart';

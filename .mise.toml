@@ -59,6 +59,22 @@ run = [
     "flutter run -d chrome",
 ]
 
+[tasks.dev-web-five]
+description = "🌐 Launch web development server with five-server and google-chrome-stable"
+run = [
+    "echo '🌐 Starting web development server with five-server and google-chrome-stable...'",
+    "flutter run -d web-server --web-port=8080 --web-hostname=127.0.0.1 &",
+    "google-chrome-stable --new-window --app=http://127.0.0.1:8080",
+]
+
+[tasks.serve-web]
+description = "🌐 Serve built web application locally"
+run = [
+    "echo '🌐 Serving web application at http://localhost:8080...'",
+    "if [ ! -d 'build/web' ]; then echo '⚠️  Web build not found. Run mise run build-web first'; exit 1; fi",
+    "cd build/web && python -m http.server 8080",
+]
+
 [tasks.gen]
 description = "⚙️  Execute build runner code generation"
 run = [
@@ -83,6 +99,14 @@ run = [
     "flutter test --coverage",
     "echo '📊 Coverage report: coverage/lcov.info'",
     "echo '💡 Tip: Run mise run coverage to generate HTML report'",
+]
+
+[tasks.test-web]
+description = "🌐 Run tests specifically for web platform"
+run = [
+    "echo '🌐 Running tests for web platform...'",
+    "flutter test --platform=chrome",
+    "echo '✅ Web tests completed'",
 ]
 
 # ===== Development Support =====
@@ -137,6 +161,22 @@ run = [
     "echo '✅ Web version: build/web/'",
 ]
 
+[tasks.build-and-serve-web]
+description = "🌐 Build and serve web application in one command"
+run = [
+    "echo '🌐 Building and serving web application...'",
+    "flutter build web --release",
+    "echo '✅ Web application built. Serving at http://localhost:8080...'",
+    "cd build/web && python -m http.server 8080",
+]
+
+[tasks.chrome-mcp]
+description = "🔍 Start Chrome DevTools MCP server for browser automation"
+run = [
+    "echo '🔍 Starting Chrome DevTools MCP server...'",
+    "bash scripts/start-chrome-mcp.sh",
+]
+
 # ===== Maintenance =====
 
 [tasks.clean]
@@ -185,12 +225,21 @@ run = [
     "echo '📋 Flutter App Template - Available Commands'",
     "echo ''",
     "echo '📱 Daily development:'",
-    "echo '  setup     Initialize project environment and dependencies'", 
-    "echo '  dev       Launch mobile development server with hot reload'",
-    "echo '  dev-web   Launch web development server with hot reload'",
-    "echo '  gen       Execute build runner code generation'",
-    "echo '  fix       Format, analyze and fix code quality issues'",
-    "echo '  test      Run all tests with coverage report generation'",
+    "echo '  setup         Initialize project environment and dependencies'", 
+    "echo '  dev           Launch mobile development server with hot reload'",
+    "echo '  dev-web       Launch web development server with hot reload'",
+    "echo '  gen           Execute build runner code generation'",
+    "echo '  fix           Format, analyze and fix code quality issues'",
+    "echo '  test          Run all tests with coverage report generation'",
+    "echo '  test-web      Run tests specifically for web platform'",
+    "echo ''",
+    "echo '🌐 Web-specific:'",
+    "echo '  build-web          Build optimized web application for deployment'",
+    "echo '  serve-web          Serve built web application locally'",
+    "echo '  build-and-serve-web  Build and serve web application in one command'",
+    "echo ''",
+    "echo '🔍 Browser Automation:'",
+    "echo '  chrome-mcp      Start Chrome DevTools MCP server for browser automation'",
     "echo ''",
     "echo '🧠 Zen Tools integration:'",
     "echo '  zen-thinkdeep   Perform deep analysis with thinkdeep AI tool'",
