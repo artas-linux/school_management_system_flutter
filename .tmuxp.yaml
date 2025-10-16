@@ -4,7 +4,7 @@ windows:
   - window_name: editor
     panes:
       - shell_command:
-          - qwen
+          - qwen -y -a -e --allowed-tools
   - window_name: service
     panes:
       - shell_command:
