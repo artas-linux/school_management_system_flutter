@@ -64,7 +64,7 @@ description = "🌐 Launch web development server with five-server and google-ch
 run = [
     "echo '🌐 Starting web development server with five-server and google-chrome-stable...'",
     "command -v google-chrome-stable > /dev/null 2>&1 || { echo '⚠️ google-chrome-stable not found. Install with: sudo apt install google-chrome-stable'; exit 1; }",
-    "flutter run -d web-server --web-port=8080 --web-hostname=127.0.0.1 &",
+    "flutter run -d web-server --web-port=8080 --web-hostname=127.0.0.1 --web-renderer canvaskit &",
     "sleep 3",  # Wait a bit for the server to start
     "google-chrome-stable --new-window --app=http://127.0.0.1:8080",
 ]
