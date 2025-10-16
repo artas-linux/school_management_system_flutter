@@ -1,0 +1,218 @@
+[tools]
+flutter = "latest"
+dart = "latest"
+bun = "latest"
+
+# ===== Daily Development =====
+
+[tasks.setup]
+description = "🧰 Initialize project environment and dependencies"
+run = [
+    "echo '🧰 Setting up Flutter project environment...'",
+    "flutter doctor -v",
+    "flutter pub get",
+    "dart pub run build_runner build --delete-conflicting-outputs",
+    "bun install -g firebase-tools",
+    "echo '✅ Setup complete!'",
+    "echo ''",
+    "echo '📌 Next steps:'",
+    "echo '  mise run dev     # Start development server'",
+    "echo '  mise run gen     # Generate code'",
+    "echo '  mise run test    # Run tests'",
+]
+
+# ===== Zen Tools Integration =====
+
+[tasks.zen-thinkdeep]
+description = "🧠 Perform comprehensive deep analysis using AI-powered thinkdeep tool"
+run = [
+    "echo '🧠 Running comprehensive deep analysis...'",
+    "bash scripts/zen-tools/cli_interface.sh thinkdeep ${args}",
+    "echo '✅ Deep analysis complete'",
+]
+
+[tasks.zen-debug]
+description = "🔍 Execute intelligent debugging session with AI-powered debug tool"
+run = [
+    "echo '🔍 Running enhanced debugging session...'",
+    "bash scripts/zen-tools/cli_interface.sh debug ${args}",
+    "echo '✅ Enhanced debugging complete'",
+]
+
+[tasks.zen-help]
+description = "ℹ️  Display comprehensive usage information for zen tools"
+run = [
+    "bash scripts/zen-tools/cli_interface.sh help",
+]
+
+[tasks.dev]
+description = "📱 Launch mobile development server with hot reload"
+run = [
+    "echo '📱 Starting mobile development server with hot reload...'",
+    "flutter run",
+]
+
+[tasks.dev-web]
+description = "🌐 Launch web development server with hot reload"
+run = [
+    "echo '🌐 Starting web development server with hot reload...'",
+    "flutter run -d chrome",
+]
+
+[tasks.gen]
+description = "⚙️  Execute build runner code generation"
+run = [
+    "echo '⚙️  Generating code with build runner...'",
+    "dart pub run build_runner build --delete-conflicting-outputs",
+    "echo '✅ Code generation complete'",
+]
+
+[tasks.fix]
+description = "✨ Format, analyze and fix code quality issues"
+run = [
+    "echo '✨ Performing code quality checks and formatting...'",
+    "dart format lib/ test/",
+    "flutter analyze",
+    "echo '✅ Code quality check complete'",
+]
+
+[tasks.test]
+description = "🧪 Run all tests with coverage report generation"
+run = [
+    "echo '🧪 Executing test suite with coverage...'",
+    "flutter test --coverage",
+    "echo '📊 Coverage report: coverage/lcov.info'",
+    "echo '💡 Tip: Run mise run coverage to generate HTML report'",
+]
+
+# ===== Development Support =====
+
+[tasks.watch]
+description = "🔄 Watch files continuously and auto-generate code on changes"
+run = [
+    "echo '🔄 Starting continuous file watch mode...'",
+    "echo '💡 Code will be automatically generated when files are changed'",
+    "dart pub run build_runner watch",
+]
+
+[tasks.coverage]
+description = "📈 Generate interactive HTML coverage report from test results"
+run = [
+    "echo '📈 Generating comprehensive HTML coverage report...'",
+    "if [ ! -f coverage/lcov.info ]; then echo '⚠️  Coverage file not found. Please run mise run test first'; exit 1; fi",
+    "genhtml coverage/lcov.info -o coverage/html --ignore-errors source",
+    "echo '✅ HTML coverage report: coverage/html/index.html'",
+    "echo '💡 Open coverage/html/index.html in your browser to view'",
+]
+
+# ===== Building =====
+
+[tasks.build-android]
+description = "📱 Build optimized Android APK/AAB for production"
+run = [
+    "echo '📱 Building optimized Android application...'",
+    "flutter pub get",
+    "dart pub run build_runner build --delete-conflicting-outputs",
+    "flutter build appbundle --release",
+    "echo '✅ Android App Bundle: build/app/outputs/bundle/release/app-release.aab'",
+]
+
+[tasks.build-ios]
+description = "🍎 Build optimized iOS IPA for App Store distribution"
+run = [
+    "echo '🍎 Building optimized iOS application...'",
+    "flutter pub get",
+    "dart pub run build_runner build --delete-conflicting-outputs",
+    "flutter build ipa --release",
+    "echo '✅ iOS IPA: build/ios/ipa/*.ipa'",
+]
+
+[tasks.build-web]
+description = "🌐 Build optimized web application for deployment"
+run = [
+    "echo '🌐 Building optimized web application...'",
+    "flutter pub get", 
+    "dart pub run build_runner build --delete-conflicting-outputs",
+    "flutter build web --release",
+    "echo '✅ Web version: build/web/'",
+]
+
+# ===== Maintenance =====
+
+[tasks.clean]
+description = "🧹 Clean project artifacts and refresh dependencies"
+run = [
+    "echo '🧹 Cleaning project artifacts and refreshing dependencies...'",
+    "flutter clean",
+    "flutter pub get",
+    "dart pub run build_runner clean",
+    "dart pub run build_runner build --delete-conflicting-outputs",
+    "echo '✅ Cleanup complete'",
+]
+
+[tasks.upgrade]
+description = "⬆️  Upgrade all dependencies to latest compatible versions"
+run = [
+    "echo '⬆️  Upgrading project dependencies...'",
+    "flutter pub upgrade",
+    "dart pub run build_runner clean",
+    "dart pub run build_runner build --delete-conflicting-outputs",
+    "echo '✅ Dependencies updated'",
+    "echo '💡 Please check changes in pubspec.yaml'",
+]
+
+# ===== External Service Integration =====
+
+[tasks.firebase]
+description = "🔥 Initialize and configure Firebase project backend services"
+run = [
+    "echo '🔥 Setting up Firebase backend services...'",
+    "firebase login",
+    "firebase init",
+    "echo '✅ Firebase setup complete'",
+    "echo ''",
+    "echo '📌 Next steps:'",
+    "echo '  1. Place ios/Runner/GoogleService-Info.plist'",
+    "echo '  2. Place android/app/google-services.json'",
+    "echo '  3. Enable Authentication/Firestore in Firebase Console'",
+]
+
+# ===== Help =====
+
+[tasks.help]
+description = "📋 Display comprehensive list of all available commands"
+run = [
+    "echo '📋 Flutter App Template - Available Commands'",
+    "echo ''",
+    "echo '📱 Daily development:'",
+    "echo '  setup     Initialize project environment and dependencies'", 
+    "echo '  dev       Launch mobile development server with hot reload'",
+    "echo '  dev-web   Launch web development server with hot reload'",
+    "echo '  gen       Execute build runner code generation'",
+    "echo '  fix       Format, analyze and fix code quality issues'",
+    "echo '  test      Run all tests with coverage report generation'",
+    "echo ''",
+    "echo '🧠 Zen Tools integration:'",
+    "echo '  zen-thinkdeep   Perform deep analysis with thinkdeep AI tool'",
+    "echo '  zen-debug       Execute intelligent debugging with zen AI tool'",
+    "echo '  zen-help        Display zen tools usage information'",
+    "echo ''",
+    "echo '🔄 Development support:'",
+    "echo '  watch     Watch files continuously and auto-generate code on changes'",
+    "echo '  coverage  Generate interactive HTML coverage report from test results'",
+    "echo ''",
+    "echo '⚙️  Building:'",
+    "echo '  build-android  Build optimized Android APK/AAB for production'",
+    "echo '  build-ios      Build optimized iOS IPA for App Store distribution'", 
+    "echo '  build-web      Build optimized web application for deployment'",
+    "echo ''",
+    "echo '🧹 Maintenance:'",
+    "echo '  clean     Clean project artifacts and refresh dependencies'",
+    "echo '  upgrade   Upgrade all dependencies to latest compatible versions'",
+    "echo ''",
+    "echo '☁️  External integration:'",
+    "echo '  firebase  Initialize and configure Firebase project backend services'",
+    "echo ''",
+    "echo '📋 Help:'",
+    "echo '  help      Display comprehensive list of all available commands'",
+]

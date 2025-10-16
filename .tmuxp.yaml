@@ -1,0 +1,12 @@
+start_directory: /home/archbtw/dev/projects/school_managment_flutter
+session_name: school_managment_flutter
+windows:
+  - window_name: editor
+    panes:
+      - shell_command:
+          - qwen
+  - window_name: service
+    panes:
+      - shell_command:
+          - mise run serve
+          # - pnpm run serve

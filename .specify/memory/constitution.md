@@ -1,50 +1,58 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# School Management System Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. User-Centric Design
+The system must prioritize intuitive user experience for Students, Teachers, and Parents. All features and workflows should be designed with the end user in mind, ensuring accessibility and ease of use across all platforms (Android, iOS, Web). The UI/UX must be responsive and adaptive to different screen sizes and user capabilities.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Role-Based Access Control (NON-NEGOTIABLE)
+All system components must implement strict role-based access control. Students, Teachers, and Parents must only access data and features relevant to their roles. This principle is non-negotiable and all implementations must be verified to ensure no unauthorized access to sensitive information.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Cross-Platform Consistency
+The Flutter-based application must provide consistent functionality and user experience across all supported platforms (Android, iOS, Web). Data synchronization must be seamless and all features must be available on all platforms, with appropriate adaptations for platform-specific conventions.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Data Privacy & Security
+All student and parent data must be handled according to educational data protection compliance standards. End-to-end encryption for sensitive data transmission and secure storage practices are mandatory. Any feature handling personal information must undergo security review before implementation.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Spec-Driven Development with Qwen CLI
+All features must follow the specification-driven development approach. Each feature must be clearly specified with user stories, acceptance criteria, and test scenarios before implementation. The Qwen CLI and Speckit framework must be used for task management and feature development to ensure consistency and traceability.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints & Requirements
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Performance Standards
+All features must meet defined performance benchmarks:
+- Dashboard load time < 3 seconds on standard mobile network
+- Data synchronization with offline cache < 5 seconds
+- Search operations response time < 1 second for up to 10,000 records
+- Support for concurrent users during peak hours (typically 8-10 AM and 2-4 PM)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Offline-First Architecture
+The system must support critical functionality when offline. Essential data (schedules, grades, notifications) must be available offline with synchronization when connectivity is restored. Features must gracefully handle network interruptions.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Scalability Requirements
+The system architecture must support:
+- Up to 10,000 students per instance
+- Concurrent access by 1,000+ users during peak times
+- Efficient data management and retrieval as data volume grows
+
+## Development Workflow & Quality Gates
+
+### Feature Development Process
+1. All features must begin with a clear specification using the Speckit framework
+2. User stories must clearly define benefits for Students, Teachers, or Parents
+3. Code implementation must follow Flutter best practices and architectural patterns
+4. Automated testing must cover 80%+ of code with feature-specific test scenarios
+5. All changes must pass review by team members before merging
+
+### Quality Gates
+- All PRs must pass automated tests (unit, integration, contract)
+- Performance metrics must meet defined standards
+- Security checks must pass for any new data handling features
+- UI/UX consistency review by designated team member
+- Cross-platform functionality verification
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and must be referenced in all technical decisions. Amendments require documentation, team approval, and migration plan for existing features. All PRs and code reviews must verify compliance with these principles. Complexity must be justified with clear user benefit, following "start simple, expand thoughtfully" principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-10-16 | **Last Amended**: 2025-10-16
