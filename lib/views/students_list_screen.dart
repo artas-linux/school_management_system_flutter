@@ -49,18 +49,39 @@ class StudentsListScreen extends StatelessWidget {
       drawer: const SchoolManagementDrawer(),
       body: ListView.builder(
         itemCount: students.length,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         itemBuilder: (context, index) {
           final student = students[index];
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: ListTile(
-              leading: CircleAvatar(child: Text(student.firstName[0])),
-              title: Text(student.fullName),
-              subtitle: Text('Grade ${student.gradeLevel} • ${student.email}'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                // Navigate to student detail page
-              },
+            margin: const EdgeInsets.only(bottom: 8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                leading: CircleAvatar(
+                  radius: 20,
+                  child: Text(
+                    student.firstName[0],
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                ),
+                title: Text(
+                  student.fullName,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(
+                  'Grade ${student.gradeLevel} • ${student.email}',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                trailing: const Icon(Icons.chevron_right, size: 20),
+                onTap: () {
+                  // Navigate to student detail page
+                },
+              ),
             ),
           );
         },

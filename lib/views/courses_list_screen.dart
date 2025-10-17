@@ -55,26 +55,40 @@ class CoursesListScreen extends StatelessWidget {
       drawer: const SchoolManagementDrawer(),
       body: ListView.builder(
         itemCount: courses.length,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         itemBuilder: (context, index) {
           final course = courses[index];
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.indigo,
-                child: Text(
-                  course.code.substring(course.code.length - 3),
-                  style: const TextStyle(color: Colors.white),
+            margin: const EdgeInsets.only(bottom: 8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                leading: CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.indigo,
+                  child: Text(
+                    course.code.substring(course.code.length - 3),
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  ),
                 ),
+                title: Text(
+                  course.name,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+                subtitle: Text(
+                  '${course.code} • ${course.credits} Credits • ${course.schedule}',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                trailing: const Icon(Icons.chevron_right, size: 20),
+                onTap: () {
+                  // Navigate to course detail page
+                },
               ),
-              title: Text(course.name),
-              subtitle: Text(
-                '${course.code} • ${course.credits} Credits\n${course.schedule}',
-              ),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () {
-                // Navigate to course detail page
-              },
             ),
           );
         },

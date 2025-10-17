@@ -12,68 +12,80 @@ class DashboardScreen extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       drawer: const SchoolManagementDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
-          children: [
-            _buildDashboardCard(
-              context,
-              'Students',
-              Icons.school,
-              Colors.blue,
-              () {
-                Navigator.pushNamed(context, '/students');
-              },
-            ),
-            _buildDashboardCard(
-              context,
-              'Teachers',
-              Icons.person,
-              Colors.green,
-              () {
-                Navigator.pushNamed(context, '/teachers');
-              },
-            ),
-            _buildDashboardCard(
-              context,
-              'Courses',
-              Icons.book,
-              Colors.orange,
-              () {
-                // Navigate to courses screen
-              },
-            ),
-            _buildDashboardCard(
-              context,
-              'Grades',
-              Icons.grade,
-              Colors.purple,
-              () {
-                // Navigate to grades screen
-              },
-            ),
-            _buildDashboardCard(
-              context,
-              'Attendance',
-              Icons.check_circle,
-              Colors.teal,
-              () {
-                // Navigate to attendance screen
-              },
-            ),
-            _buildDashboardCard(
-              context,
-              'Schedule',
-              Icons.schedule,
-              Colors.red,
-              () {
-                // Navigate to schedule screen
-              },
-            ),
-          ],
+      body: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            // Calculate crossAxisCount based on screen width for responsiveness
+            int crossAxisCount = constraints.maxWidth < 600 ? 2 : 
+                                constraints.maxWidth < 900 ? 3 : 4;
+            
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: GridView.count(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 12.0,
+                mainAxisSpacing: 12.0,
+                shrinkWrap: true,
+                childAspectRatio: 1.0, // Make cards more square-like
+                children: [
+                  _buildDashboardCard(
+                    context,
+                    'Students',
+                    Icons.school,
+                    Colors.blue,
+                    () {
+                      Navigator.pushNamed(context, '/students');
+                    },
+                  ),
+                  _buildDashboardCard(
+                    context,
+                    'Teachers',
+                    Icons.person,
+                    Colors.green,
+                    () {
+                      Navigator.pushNamed(context, '/teachers');
+                    },
+                  ),
+                  _buildDashboardCard(
+                    context,
+                    'Courses',
+                    Icons.book,
+                    Colors.orange,
+                    () {
+                      // Navigate to courses screen
+                    },
+                  ),
+                  _buildDashboardCard(
+                    context,
+                    'Grades',
+                    Icons.grade,
+                    Colors.purple,
+                    () {
+                      // Navigate to grades screen
+                    },
+                  ),
+                  _buildDashboardCard(
+                    context,
+                    'Attendance',
+                    Icons.check_circle,
+                    Colors.teal,
+                    () {
+                      // Navigate to attendance screen
+                    },
+                  ),
+                  _buildDashboardCard(
+                    context,
+                    'Schedule',
+                    Icons.schedule,
+                    Colors.red,
+                    () {
+                      // Navigate to schedule screen
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -87,21 +99,29 @@ class DashboardScreen extends StatelessWidget {
     VoidCallback onTap,
   ) {
     return Card(
-      elevation: 4,
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: InkWell(
         onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
         child: Container(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, size: 48, color: color),
-              const SizedBox(height: 12),
+              Icon(
+                icon, 
+                size: 36, // Smaller icon
+                color: color,
+              ),
+              const SizedBox(height: 8), // Smaller spacing
               Text(
                 title,
                 style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 14, // Smaller font
+                  fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -64,27 +64,40 @@ class GradesListScreen extends StatelessWidget {
       drawer: const SchoolManagementDrawer(),
       body: ListView.builder(
         itemCount: grades.length,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         itemBuilder: (context, index) {
           final grade = grades[index];
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: ListTile(
-              title: Text(grade.assignmentName),
-              subtitle: Text(
-                'Course ID: ${grade.courseId} • Student ID: ${grade.studentId}\n'
-                'Earned: ${grade.pointsEarned}/${grade.pointsPossible} (${grade.percentage.toStringAsFixed(1)}%) • ${grade.letterGrade}',
-              ),
-              trailing: Text(
-                grade.letterGrade,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: _getGradeColor(grade.percentage),
+            margin: const EdgeInsets.only(bottom: 8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                title: Text(
+                  grade.assignmentName,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
+                subtitle: Text(
+                  'Course: ${grade.courseId} • Student: ${grade.studentId}\n'
+                  'Grade: ${grade.pointsEarned}/${grade.pointsPossible} (${grade.percentage.toStringAsFixed(1)}%)',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                trailing: Text(
+                  grade.letterGrade,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: _getGradeColor(grade.percentage),
+                  ),
+                ),
+                onTap: () {
+                  // Navigate to grade detail page
+                },
               ),
-              onTap: () {
-                // Navigate to grade detail page
-              },
             ),
           );
         },

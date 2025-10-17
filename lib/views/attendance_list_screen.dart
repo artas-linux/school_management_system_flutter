@@ -51,27 +51,40 @@ class AttendanceListScreen extends StatelessWidget {
       drawer: const SchoolManagementDrawer(),
       body: ListView.builder(
         itemCount: attendanceRecords.length,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         itemBuilder: (context, index) {
           final attendance = attendanceRecords[index];
           return Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: ListTile(
-              leading: _getStatusIcon(attendance.status),
-              title: Text('Student ID: ${attendance.studentId}'),
-              subtitle: Text(
-                'Course ID: ${attendance.courseId}\n'
-                '${attendance.date.toString().split(' ')[0]} • ${attendance.status.displayName}',
-              ),
-              trailing: Text(
-                attendance.status.displayName,
-                style: TextStyle(
-                  color: _getStatusColor(attendance.status),
-                  fontWeight: FontWeight.w500,
+            margin: const EdgeInsets.only(bottom: 8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 2,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: ListTile(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                leading: _getStatusIcon(attendance.status),
+                title: Text(
+                  'Student ID: ${attendance.studentId}',
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
+                subtitle: Text(
+                  'Course: ${attendance.courseId} • ${attendance.date.toString().split(' ')[0]}',
+                  style: const TextStyle(fontSize: 12),
+                ),
+                trailing: Text(
+                  attendance.status.displayName,
+                  style: TextStyle(
+                    color: _getStatusColor(attendance.status),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                  ),
+                ),
+                onTap: () {
+                  // Navigate to attendance detail page
+                },
               ),
-              onTap: () {
-                // Navigate to attendance detail page
-              },
             ),
           );
         },
