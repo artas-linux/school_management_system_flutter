@@ -26,7 +26,7 @@ This project is built with Flutter. To get started:
 This project is configured for deployment to GitHub Pages:
 
 1. The GitHub Actions workflow is set up in `.github/workflows/deploy.yml`
-2. After pushing changes to the `main` branch, the app will be automatically built and deployed
+2. After pushing changes to the `main` branch, the app will be automatically built (`flutter build web`) and the output in `build/web` will be deployed to GitHub Pages
 3. Your site will be available at: `https://<your-username>.github.io/school_managment_flutter/`
 
 For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
