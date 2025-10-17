@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "dart-mcp-server": {
+      "command": "dart",
+      "args": ["run", "bin/mcp_server.dart"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "Dart": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.dartai.com/mcp"]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    }
+  }
+}

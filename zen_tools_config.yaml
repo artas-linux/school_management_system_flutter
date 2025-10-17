@@ -1,0 +1,36 @@
+# Zen Tools Configuration
+# This file contains configuration settings for the Zen tools integration framework
+
+# General framework settings
+framework:
+  id: "zen-tools-framework"
+  version: "1.0.0"
+  status: "active"
+
+# Security settings - all processing must happen locally per project constitution
+security:
+  local_only: true
+  data_handling_policy: "all data processed locally, no external transmission"
+  privacy_level: 5
+  encryption_required: false
+
+# Tool registry configuration
+tools:
+  thinkdeep:
+    name: "thinkdeep"
+    type: "analysis"
+    cli_command: "dart run tool/thinkdeep.dart"
+    supported_features: ["deep-analysis", "architecture-review", "code-quality"]
+    is_active: true
+  debug:
+    name: "debug"
+    type: "debugging"
+    cli_command: "dart run tool/debug.dart"
+    supported_features: ["error-detection", "performance-analysis", "memory-usage"]
+    is_active: true
+
+# CLI Handler settings
+cli:
+  command_prefix: "mise run zen-"
+  output_format: "json"
+  execution_path: "./scripts/zen-tools/"
