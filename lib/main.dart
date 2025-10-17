@@ -85,4 +85,3 @@ class _MaterialAppWithDialogState extends State<MaterialAppWithDialog> {
     );
   }
 }
-}
