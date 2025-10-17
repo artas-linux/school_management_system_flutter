@@ -2,6 +2,14 @@
 flutter = "latest"
 dart = "latest"
 bun = "latest"
+node = "latest"
+pnpm = "latest"
+uv = "latest"
+cargo-binstall = "latest"
+deno = "latest"
+go = "latest"
+watchexec = "latest"
+"npm:five-server" = "latest"
 
 # ===== Daily Development =====
 
@@ -64,7 +72,7 @@ description = "🌐 Launch web development server with five-server and google-ch
 run = [
     "echo '🌐 Starting web development server with five-server and google-chrome-stable...'",
     "command -v google-chrome-stable > /dev/null 2>&1 || { echo '⚠️ google-chrome-stable not found. Install with: sudo apt install google-chrome-stable'; exit 1; }",
-    "flutter run -d web-server --web-port=8080 --web-hostname=127.0.0.1 --web-renderer canvaskit &",
+    "flutter run -d web-server --web-port=8080 --web-hostname=127.0.0.1 --dart-define=FLUTTER_WEB_RENDERER=canvaskit &",
     "sleep 3",  # Wait a bit for the server to start
     "google-chrome-stable --new-window --app=http://127.0.0.1:8080",
 ]
@@ -192,6 +200,31 @@ run = [
     "echo '✅ Cleanup complete'",
 ]
 
+[tasks.kill-ports]
+description = "🛑 Kill processes running on common Flutter ports (8080, 9100, 42613, etc.)"
+run = [
+    "echo '🛑 Killing processes on common Flutter ports...'",
+    "kill -9 $(lsof -t -i:8080) 2>/dev/null || echo '❌ No process found on port 8080 or lsof not available'",
+    "kill -9 $(lsof -t -i:9100) 2>/dev/null || echo '❌ No process found on port 9100 or lsof not available'",
+    "kill -9 $(lsof -t -i:3000) 2>/dev/null || echo '❌ No process found on port 3000 or lsof not available'",
+    "kill -9 $(lsof -t -i:3001) 2>/dev/null || echo '❌ No process found on port 3001 or lsof not available'",
+    "kill -9 $(lsof -t -i:5000) 2>/dev/null || echo '❌ No process found on port 5000 or lsof not available'",
+    "kill -9 $(lsof -t -i:5555) 2>/dev/null || echo '❌ No process found on port 5555 or lsof not available'",
+    "kill -9 $(lsof -t -i:8000) 2>/dev/null || echo '❌ No process found on port 8000 or lsof not available'",
+    "kill -9 $(lsof -t -i:9000) 2>/dev/null || echo '❌ No process found on port 9000 or lsof not available'",
+    "kill -9 $(lsof -t -i:42613) 2>/dev/null || echo '❌ No process found on port 42613 or lsof not available'",
+    "echo '✅ Port cleanup complete'",
+]
+
+[tasks.clean-all]
+description = "🔥 Complete clean: Clean project and kill running processes"
+run = [
+    "echo '🔥 Performing complete cleanup...'",
+    "mise run clean",
+    "mise run kill-ports",
+    "echo '✅ Complete cleanup finished'",
+]
+
 [tasks.upgrade]
 description = "⬆️  Upgrade all dependencies to latest compatible versions"
 run = [
@@ -220,6 +253,10 @@ run = [
 ]
 
 # ===== Help =====
+
+[settings]
+experimental = true # enable experimental features
+verbose = false     # set to true to see full installation output
 
 [tasks.help]
 description = "📋 Display comprehensive list of all available commands"
@@ -258,8 +295,10 @@ run = [
     "echo '  build-web      Build optimized web application for deployment'",
     "echo ''",
     "echo '🧹 Maintenance:'",
-    "echo '  clean     Clean project artifacts and refresh dependencies'",
-    "echo '  upgrade   Upgrade all dependencies to latest compatible versions'",
+    "echo '  clean         Clean project artifacts and refresh dependencies'",
+    "echo '  kill-ports    Kill processes running on common Flutter ports'",
+    "echo '  clean-all     Complete clean: Clean project and kill running processes'",
+    "echo '  upgrade       Upgrade all dependencies to latest compatible versions'",
     "echo ''",
     "echo '☁️  External integration:'",
     "echo '  firebase  Initialize and configure Firebase project backend services'",

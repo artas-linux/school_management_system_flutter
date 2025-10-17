@@ -99,7 +99,10 @@ class SchoolManagementDrawer extends StatelessWidget {
             title: const Text('Settings'),
             onTap: () {
               Navigator.pop(context); // Close drawer
-              // Navigate to settings
+              Navigator.pushReplacementNamed(
+                context,
+                SchoolManagementConstants.settingsRoute,
+              );
             },
           ),
           ListTile(
