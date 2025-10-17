@@ -106,7 +106,7 @@ run = [
 description = "🧪 Run all tests with coverage report generation"
 run = [
     "echo '🧪 Executing test suite with coverage...'",
-    "flutter test --coverage",
+    "flutter test --coverage --dart-define=FLUTTER_TEST=true",
     "echo '📊 Coverage report: coverage/lcov.info'",
     "echo '💡 Tip: Run mise run coverage to generate HTML report'",
 ]

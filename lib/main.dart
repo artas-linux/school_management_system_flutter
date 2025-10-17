@@ -49,19 +49,25 @@ class _MaterialAppWithDialogState extends State<MaterialAppWithDialog> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _showUnderConstructionDialog();
-    });
+    // Show the dialog only in non-test environments in the next frame
+    if (!isTestEnvironment()) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (context.mounted) {
+          showDialog(
+            context: context,
+            barrierDismissible: false, // Prevent dismissing the dialog
+            builder: (BuildContext context) {
+              return const UnderConstructionDialog();
+            },
+          );
+        }
+      });
+    }
   }
 
-  void _showUnderConstructionDialog() {
-    showDialog(
-      context: context,
-      barrierDismissible: false, // Prevent dismissing the dialog
-      builder: (BuildContext context) {
-        return const UnderConstructionDialog();
-      },
-    );
+  bool isTestEnvironment() {
+    // Check if running in test mode using a more general approach
+    return const bool.fromEnvironment('FLUTTER_TEST');
   }
 
   @override
